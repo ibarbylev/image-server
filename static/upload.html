@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Image</title>
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    alert('Success: ' + data.message + '\nURL: ' + data.url);
+                }
+            })
+            .catch(error => alert('Error: ' + error));
+        }
+    </script>
+</head>
+<body>
+    <h1>Upload Image</h1>
+    <form onsubmit="handleSubmit(event)" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".jpg,.jpeg,.png,.gif" required>
+        <input type="submit" value="Upload">
+    </form>
+    <p>Supported formats: JPG, PNG, GIF. Max size: 5MB</p>
+    <a href="/">Back to home</a>
+</body>
+</html>
