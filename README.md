@@ -1,12 +1,12 @@
 # ТЗ проекта "Сервер картинок"
-[**0. Организация работы над проектом**]()
-[**1. Введение**](https://github.com/ibarbylev/image-server/tree/master?tab=readme-ov-file#0-%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%BD%D0%B0%D0%B4-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BE%D0%BC)
-**2. Функциональные требования**
-**3. Нефункциональные требования**
-**4. Архитектура и структура**
-**5. Технические требования**
-**6. Этапы выполнения**
- **7. Критерии успешности**
+[**0. Организация работы над проектом**](https://github.com/ibarbylev/image-server/tree/master?tab=readme-ov-file#0-%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D0%BD%D0%B0%D0%B4-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BE%D0%BC)
+[**1. Введение**](https://github.com/ibarbylev/image-server/tree/master?tab=readme-ov-file#1-%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5)
+[**2. Функциональные требования**](https://github.com/ibarbylev/image-server/tree/master?tab=readme-ov-file#2-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D1%82%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
+[**3. Нефункциональные требования**](https://github.com/ibarbylev/image-server/tree/master?tab=readme-ov-file#3-%D0%BD%D0%B5%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D1%82%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
+[**4. Архитектура и структура**]()
+[**5. Технические требования**]()
+[**6. Этапы выполнения**]()
+[**7. Критерии успешности**]()
 
 ## **0. Организация работы над проектом**
 
@@ -249,7 +249,7 @@
 
 ------
 
-[## **4. Архитектура и структура**]()
+## **4. Архитектура и структура**
 
 ### **1. Общая архитектура**
 
