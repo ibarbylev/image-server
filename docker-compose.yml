@@ -11,6 +11,8 @@ services:
     expose:
       - 5000
     restart: unless-stopped
+    command: >
+      sh -c "mkdir -p /images /logs && chmod -R 775 /images /logs && python app.py"
 
   nginx:
     image: nginx:latest
@@ -24,3 +26,5 @@ services:
     depends_on:
       - app
     restart: unless-stopped
+    command: >
+      sh -c "mkdir -p /images && chmod -R 775 /images && nginx -g 'daemon off;'"

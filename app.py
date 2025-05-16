@@ -12,8 +12,8 @@ import urllib.parse
 # Configuration
 HOST = '0.0.0.0'
 PORT = 5000
-UPLOAD_FOLDER = 'images'
-LOG_FILE = 'logs/app.log'
+UPLOAD_FOLDER = '/images'  # Абсолютный путь для Docker volume
+LOG_FILE = '/logs/app.log'  # Абсолютный путь для Docker volume
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif'}
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
@@ -94,7 +94,8 @@ class ImageServer(BaseHTTPRequestHandler):
                 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
                 with open(filepath, 'wb') as f:
                     f.write(file_data)
-                    os.chmod(filepath, 0o644)  # Ensure readable permissions
+                    os.chmod(filepath, 0o664)  # Ensure readable by Nginx
+                logging.info(f'File saved to: {filepath}')  # Debug log
 
                 # Verify image
                 try:
