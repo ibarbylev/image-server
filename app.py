@@ -39,6 +39,9 @@ class ImageServer(BaseHTTPRequestHandler):
         elif self.path == '/upload':
             self.serve_file('static/upload.html', 'text/html')
             logging.info('Upload page accessed')
+        elif self.path == '/images':
+            self.serve_images_list()
+            logging.info('Images list accessed')
         else:
             self.send_error(404, 'Not Found')
 
@@ -91,6 +94,7 @@ class ImageServer(BaseHTTPRequestHandler):
                 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
                 with open(filepath, 'wb') as f:
                     f.write(file_data)
+                    os.chmod(filepath, 0o644)  # Ensure readable permissions
 
                 # Verify image
                 try:
@@ -132,11 +136,28 @@ class ImageServer(BaseHTTPRequestHandler):
         except FileNotFoundError:
             self.send_error(404, 'Not Found')
 
+    def serve_images_list(self):
+        try:
+            os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+            files = [f for f in os.listdir(UPLOAD_FOLDER) if allowed_file(f)]
+            html = '<!DOCTYPE html><html><head><title>Uploaded Images</title></head><body>'
+            html += '<h1>Uploaded Images</h1><ul>'
+            for file in files:
+                html += f'<li><a href="/images/{file}">{file}</a></li>'
+            html += '</ul><p><a href="/">Back to home</a></p></body></html>'
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+            self.wfile.write(html.encode('utf-8'))
+        except Exception as e:
+            self.send_error_response(500, f'Error listing images: {str(e)}')
+            logging.error(f'Error listing images: {str(e)}')
+
     def send_error_response(self, code, message):
         self.send_response(code)
         self.send_header('Content-type', 'application/json')
         self.end_headers()
-        self.wfile.write(f'{{"error": "{message}"}}'.encode())
+        self.wfile.write(json.dumps({"error": message}).encode('utf-8'))
 
 def run():
     server_address = (HOST, PORT)

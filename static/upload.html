@@ -7,6 +7,7 @@
             event.preventDefault();
             const form = event.target;
             const formData = new FormData(form);
+            const resultDiv = document.getElementById('result');
 
             fetch('/upload', {
                 method: 'POST',
@@ -15,12 +16,15 @@
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
-                    alert('Error: ' + data.error);
+                    resultDiv.innerHTML = '<p style="color: red;">Error: ' + data.error + '</p>';
                 } else {
-                    alert('Success: ' + data.message + '\nURL: ' + data.url);
+                    resultDiv.innerHTML = '<p style="color: green;">' + data.message +
+                        '<br>URL: <a href="' + data.url + '">' + data.url + '</a></p>';
                 }
             })
-            .catch(error => alert('Error: ' + error));
+            .catch(error => {
+                resultDiv.innerHTML = '<p style="color: red;">Error: ' + error + '</p>';
+            });
         }
     </script>
 </head>
@@ -31,6 +35,7 @@
         <input type="submit" value="Upload">
     </form>
     <p>Supported formats: JPG, PNG, GIF. Max size: 5MB</p>
-    <a href="/">Back to home</a>
+    <div id="result"></div>
+    <p><a href="/">Back to home</a></p>
 </body>
 </html>
