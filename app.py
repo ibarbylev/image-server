@@ -4,16 +4,29 @@ import cgi
 import os
 import uuid
 import logging
-from datetime import datetime
 from PIL import Image
-import mimetypes
-import urllib.parse
 
 # Configuration
 HOST = '0.0.0.0'
 PORT = 5000
-UPLOAD_FOLDER = '/images'  # Абсолютный путь для Docker volume
-LOG_FILE = '/logs/app.log'  # Абсолютный путь для Docker volume
+
+# Detect if running in Docker
+def is_docker():
+    try:
+        with open('/proc/1/cgroup', 'rt') as f:
+            # returns True if the script running in Docker or Kubernetes:
+            return 'docker' in f.read() or 'kubepod' in f.read()
+    except FileNotFoundError:
+        return False
+
+# Set paths based on environment
+if is_docker():
+    UPLOAD_FOLDER = '/images'  # Absolute path for Docker
+    LOG_FILE = '/logs/app.log'  # Absolute path for Docker
+else:
+    UPLOAD_FOLDER = 'images'  # Relative path for non-Docker
+    LOG_FILE = 'logs/app.log'  # Relative path for non-Docker
+
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif'}
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
