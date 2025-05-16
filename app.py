@@ -1,3 +1,4 @@
+import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import cgi
 import os
@@ -11,8 +12,8 @@ import urllib.parse
 # Configuration
 HOST = '0.0.0.0'
 PORT = 5000
-UPLOAD_FOLDER = '/images'
-LOG_FILE = '/logs/app.log'
+UPLOAD_FOLDER = 'images'
+LOG_FILE = 'logs/app.log'
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif'}
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
@@ -112,7 +113,7 @@ class ImageServer(BaseHTTPRequestHandler):
                     'filename': filename,
                     'url': image_url
                 }
-                self.wfile.write(str(response).encode())
+                self.wfile.write(json.dumps(response).encode('utf-8'))
 
             except Exception as e:
                 self.send_error_response(500, f'Error saving file: {str(e)}')
